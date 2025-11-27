@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-AURION Research Labs - System Architecture Diagram
-Automation for Universal Research, Intelligence, and Operations Networks
+ATLAS - Advanced Technology Labs for Applied Sciences
+System Architecture Diagram
+"Building the Intelligence that Builds the Future"
 """
 
 import matplotlib.pyplot as plt
@@ -9,7 +10,7 @@ import matplotlib.patches as mpatches
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch, Circle, Rectangle
 import numpy as np
 
-# AURION Brand Colors
+# ATLAS Brand Colors
 COLORS = {
     'deep_space': '#0a0f1a',
     'aurora_cyan': '#00d4ff',
@@ -32,10 +33,10 @@ def create_architecture_diagram():
     ax.axis('off')
     
     # Title
-    ax.text(50, 97, 'AURION RESEARCH LABS', fontsize=28, fontweight='bold', 
-            color=COLORS['aurora_cyan'], ha='center', va='center', 
+    ax.text(50, 97, 'ATLAS - ADVANCED TECHNOLOGY LABS', fontsize=28, fontweight='bold',
+            color=COLORS['aurora_cyan'], ha='center', va='center',
             fontfamily='sans-serif')
-    ax.text(50, 94, 'Automation for Universal Research, Intelligence, and Operations Networks', 
+    ax.text(50, 94, 'Building the Intelligence that Builds the Future',
             fontsize=12, color=COLORS['silver'], ha='center', va='center',
             fontfamily='sans-serif', style='italic')
     
@@ -205,7 +206,7 @@ def create_architecture_diagram():
             ha='center', va='center', rotation=90)
     
     # Copyright
-    ax.text(50, 1, '© 2025 AURION Research Labs — Building the Intelligence that Builds the Future',
+    ax.text(50, 1, '© 2025 ATLAS - Advanced Technology Labs for Applied Sciences',
             fontsize=8, color=COLORS['silver'], ha='center', style='italic')
     
     plt.tight_layout()
@@ -213,8 +214,8 @@ def create_architecture_diagram():
 
 if __name__ == '__main__':
     fig = create_architecture_diagram()
-    fig.savefig('/home/claude/aurion-labs/architecture/aurion_architecture.png', 
+    fig.savefig('assets/atlas_architecture.png',
                 dpi=300, bbox_inches='tight', facecolor='#0a0f1a')
-    fig.savefig('/home/claude/aurion-labs/architecture/aurion_architecture.svg', 
+    fig.savefig('assets/atlas_architecture.svg',
                 format='svg', bbox_inches='tight', facecolor='#0a0f1a')
-    print("Architecture diagram saved!")
+    print("ATLAS Architecture diagram saved!")

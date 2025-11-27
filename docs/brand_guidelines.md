@@ -1,14 +1,11 @@
-# AURION Research Labs
+# ATLAS - Advanced Technology Labs for Applied Sciences
 ## Brand Identity Guidelines
 
 ---
 
 ## Brand Overview
 
-**Full Name:** AURION Research Labs
-
-**Acronym Definition:**
-**AURION** = **A**utomation for **U**niversal **R**esearch, **I**ntelligence, and **O**perations **N**etworks
+**Full Name:** ATLAS - Advanced Technology Labs for Applied Sciences
 
 **Tagline:** "Building the Intelligence that Builds the Future"
 
@@ -92,7 +89,7 @@
 ## Logo Usage
 
 ### Clear Space
-Maintain clear space around the logo equal to the height of the "A" in AURION on all sides.
+Maintain clear space around the logo equal to the height of the "A" in ATLAS on all sides.
 
 ### Minimum Size
 - Digital: 120px width minimum
@@ -105,11 +102,11 @@ Maintain clear space around the logo equal to the height of the "A" in AURION on
 4. **Dark** - For use on light backgrounds (#0a0f1a)
 
 ### Logo Don'ts
-- ❌ Don't stretch or distort
-- ❌ Don't change colors outside approved palette
-- ❌ Don't add effects (shadows, outlines)
-- ❌ Don't place on busy backgrounds
-- ❌ Don't rotate the logo
+- Don't stretch or distort
+- Don't change colors outside approved palette
+- Don't add effects (shadows, outlines)
+- Don't place on busy backgrounds
+- Don't rotate the logo
 
 ---
 
@@ -122,7 +119,7 @@ Maintain clear space around the logo equal to the height of the "A" in AURION on
 - Circuit board patterns (subtle backgrounds)
 
 ### Gradients
-Primary gradient: Linear 135° from #00d4ff → #7c3aed → #ec4899
+Primary gradient: Linear 135deg from #00d4ff to #7c3aed to #ec4899
 
 ```css
 background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #ec4899 100%);
@@ -134,7 +131,7 @@ background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #ec4899 100%);
 box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
 
 /* Card elevation */
-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
             0 2px 4px -2px rgba(0, 0, 0, 0.2);
 ```
 
@@ -202,7 +199,7 @@ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
 - Use "we" for the company, "you" for customers
 
 ### Key Messages
-1. "AURION Labs is the AI factory that builds AI factories."
+1. "ATLAS is the AI factory that builds AI factories."
 2. "From prompt to production in minutes, not months."
 3. "Domain expertise meets infinite automation."
 4. "Your research, our intelligence, unlimited potential."
@@ -224,4 +221,5 @@ box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
 
 ---
 
-© 2025 AURION Research Labs. All rights reserved.
+ATLAS - Advanced Technology Labs for Applied Sciences
+"Building the Intelligence that Builds the Future"

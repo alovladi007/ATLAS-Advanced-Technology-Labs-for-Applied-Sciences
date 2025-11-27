@@ -2,7 +2,9 @@ import React, { useState, useRef, Suspense, useMemo } from 'react';
 import * as THREE from 'three';
 
 // =====================================================
-// AURION Research Labs - Interactive Marketing Website
+// ATLAS - Advanced Technology Labs for Applied Sciences
+// Interactive Marketing Website
+// "Building the Intelligence that Builds the Future"
 // =====================================================
 
 // Brand Colors
@@ -214,7 +216,7 @@ function Navigation() {
           <polygon points="60,10 100,35 100,75 60,100 20,75 20,35" fill="none" stroke="url(#logoGrad)" strokeWidth="3"/>
           <circle cx="60" cy="55" r="8" fill="url(#logoGrad)"/>
         </svg>
-        <span style={{ fontSize: '24px', fontWeight: 800, color: colors.auroraCyan, letterSpacing: '2px' }}>AURION</span>
+        <span style={{ fontSize: '24px', fontWeight: 800, color: colors.auroraCyan, letterSpacing: '2px' }}>ATLAS</span>
       </div>
       
       <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
@@ -566,8 +568,8 @@ function Footer() {
       }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-            <span style={{ fontSize: '20px', fontWeight: 800, color: colors.auroraCyan }}>AURION</span>
-            <span style={{ fontSize: '14px', color: colors.silver }}>RESEARCH LABS</span>
+            <span style={{ fontSize: '20px', fontWeight: 800, color: colors.auroraCyan }}>ATLAS</span>
+            <span style={{ fontSize: '14px', color: colors.silver }}>ADVANCED TECHNOLOGY LABS</span>
           </div>
           <p style={{ fontSize: '14px', color: colors.silver, maxWidth: '300px' }}>
             Building the Intelligence that Builds the Future.
@@ -598,7 +600,7 @@ function Footer() {
         textAlign: 'center',
       }}>
         <p style={{ fontSize: '13px', color: colors.silver }}>
-          © 2025 AURION Research Labs. All rights reserved.
+          © 2025 ATLAS - Advanced Technology Labs for Applied Sciences. All rights reserved.
         </p>
       </div>
     </footer>
@@ -606,7 +608,7 @@ function Footer() {
 }
 
 // Main App Component
-export default function AurionWebsite() {
+export default function ATLASWebsite() {
   return (
     <div style={{
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',

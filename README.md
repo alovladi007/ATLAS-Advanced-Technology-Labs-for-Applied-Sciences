@@ -19,7 +19,7 @@ ATLAS is an AI-powered meta-automation platform that designs, codes, and deploys
 
 ```
 atlas-labs/
-├── src/
+├── src/                           # Backend API (NestJS)
 │   ├── main.ts
 │   └── modules/
 │       ├── app.module.ts
@@ -33,16 +33,23 @@ atlas-labs/
 │           ├── electroai.controller.ts
 │           ├── photonai.controller.ts
 │           └── bioai.controller.ts
+├── frontend/                      # Frontend (Next.js)
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   └── styles/
+│   └── package.json
 ├── prisma/
 │   └── schema.prisma
 ├── assets/
-│   ├── aurion_architecture.png
-│   ├── aurion_architecture.svg
-│   └── aurion_logo.svg
+│   ├── atlas_architecture.png
+│   ├── atlas_architecture.svg
+│   ├── atlas_logo.svg
+│   └── atlas_website.jsx
 ├── docs/
 │   ├── brand_guidelines.md
 │   ├── architecture_diagram.py
-│   └── AURION_Investor_Pitch_Deck.pptx
+│   └── ATLAS_Investor_Pitch_Deck.pptx
 ├── docker-compose.yml
 ├── Dockerfile
 ├── init-db.sql
@@ -52,7 +59,7 @@ atlas-labs/
 
 ---
 
-## Three Verticals
+## Three Verticals (Divisions)
 
 ### ElectroAI Division
 **Electronics & Semiconductor Manufacturing**
@@ -92,7 +99,7 @@ atlas-labs/
 
 ## Quick Start
 
-### 1. Install Dependencies
+### 1. Install Backend Dependencies
 
 ```bash
 npm install
@@ -104,17 +111,42 @@ npm install
 docker compose up -d
 ```
 
-### 3. Run Development Server
+**Infrastructure Services:**
+- PostgreSQL (pgvector): localhost:5432
+- Redis: localhost:6379
+- NATS: localhost:4222
+- MinIO: localhost:9000 (Console: localhost:9001)
+
+### 3. Run Backend API
 
 ```bash
 npm run dev
 ```
 
-**Services:**
-- API: http://localhost:8080
-- Swagger Docs: http://localhost:8080/docs
-- Health Check: http://localhost:8080/api/v1/health
-- MinIO Console: http://localhost:9001
+### 4. Install Frontend Dependencies
+
+```bash
+cd frontend && npm install
+```
+
+### 5. Run Frontend
+
+```bash
+npm run dev
+```
+
+---
+
+## Service URLs
+
+| Service | URL |
+|---------|-----|
+| **API Server** | http://localhost:8080 |
+| **Swagger Docs** | http://localhost:8080/docs |
+| **Health Check** | http://localhost:8080/api/v1/health |
+| **Frontend** | http://localhost:3001 |
+| **MinIO Console** | http://localhost:9001 |
+| **NATS Monitor** | http://localhost:8222 |
 
 ---
 
@@ -152,6 +184,54 @@ POST /api/v1/bioai/ecg/analyze          - ECG analysis
 POST /api/v1/bioai/eeg/analyze          - EEG analysis
 POST /api/v1/bioai/dicom/process        - DICOM processing
 POST /api/v1/bioai/hrv/analyze          - HRV analysis
+```
+
+---
+
+## Claude-Ready Build Prompts
+
+### Backend API Layer
+```
+Build a NestJS REST API with:
+- JWT authentication with refresh tokens
+- Multi-tenant organization/workspace model
+- Async job queue with BullMQ
+- PostgreSQL with pgvector for embeddings
+- S3-compatible file storage
+- Swagger/OpenAPI documentation
+- Domain modules: ElectroAI, PhotonAI, BioAI
+```
+
+### Frontend Layer
+```
+Build a Next.js 14 frontend with:
+- React Three Fiber for 3D visualizations
+- TailwindCSS with dark mode
+- Multi-tenant workspace dashboard
+- Real-time job status updates
+- D3.js charts for analytics
+- Responsive design with mobile support
+```
+
+### AI Core Layer
+```
+Build an AI orchestration system with:
+- LangGraph for multi-agent workflows
+- Domain Intelligence Graph (RAG + embeddings)
+- Code generation pipelines
+- Simulation result analysis
+- Natural language to API translation
+```
+
+### Automation Orchestration Layer
+```
+Build a DevOps automation system with:
+- GitHub Actions CI/CD pipelines
+- Terraform infrastructure as code
+- Docker multi-stage builds
+- Kubernetes deployment manifests
+- Auto-rollback mechanisms
+- A/B testing infrastructure
 ```
 
 ---
