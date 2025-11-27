@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Aurora gradient -->
+    <linearGradient id="auroraGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Circuit pattern -->
+    <pattern id="circuitPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M0 20 L15 20 M25 20 L40 20 M20 0 L20 15 M20 25 L20 40" 
+            stroke="#1e293b" stroke-width="1" fill="none"/>
+      <circle cx="20" cy="20" r="3" fill="#1e293b"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="400" fill="#0a0f1a"/>
+  
+  <!-- Subtle circuit background -->
+  <rect width="400" height="400" fill="url(#circuitPattern)" opacity="0.3"/>
+  
+  <!-- Main logo shape - Hexagonal tetrahedron representing synthesis -->
+  <g transform="translate(200, 180)">
+    <!-- Outer hexagon ring -->
+    <polygon points="0,-80 69,-40 69,40 0,80 -69,40 -69,-40" 
+             fill="none" stroke="url(#auroraGradient)" stroke-width="3" filter="url(#glow)"/>
+    
+    <!-- Inner tetrahedron representing AI/intelligence -->
+    <polygon points="0,-55 48,28 -48,28" 
+             fill="none" stroke="#00d4ff" stroke-width="2.5" filter="url(#glow)"/>
+    
+    <!-- Central triangle (inverted) representing automation -->
+    <polygon points="0,35 -30,-10 30,-10" 
+             fill="none" stroke="#7c3aed" stroke-width="2" filter="url(#glow)"/>
+    
+    <!-- Neural network nodes -->
+    <circle cx="0" cy="-55" r="6" fill="#00d4ff" filter="url(#glow)"/>
+    <circle cx="48" cy="28" r="6" fill="#7c3aed" filter="url(#glow)"/>
+    <circle cx="-48" cy="28" r="6" fill="#ec4899" filter="url(#glow)"/>
+    
+    <!-- Central node -->
+    <circle cx="0" cy="0" r="8" fill="url(#auroraGradient)" filter="url(#glow)"/>
+    
+    <!-- Connection lines from center -->
+    <line x1="0" y1="0" x2="0" y2="-55" stroke="#00d4ff" stroke-width="1.5" opacity="0.7"/>
+    <line x1="0" y1="0" x2="48" y2="28" stroke="#7c3aed" stroke-width="1.5" opacity="0.7"/>
+    <line x1="0" y1="0" x2="-48" y2="28" stroke="#ec4899" stroke-width="1.5" opacity="0.7"/>
+    
+    <!-- Orbital rings -->
+    <ellipse cx="0" cy="0" rx="70" ry="25" fill="none" stroke="#00d4ff" stroke-width="1" 
+             opacity="0.4" transform="rotate(-30)"/>
+    <ellipse cx="0" cy="0" rx="70" ry="25" fill="none" stroke="#7c3aed" stroke-width="1" 
+             opacity="0.4" transform="rotate(30)"/>
+  </g>
+  
+  <!-- Company name -->
+  <text x="200" y="310" text-anchor="middle" font-family="Arial, sans-serif" 
+        font-size="42" font-weight="bold" fill="url(#auroraGradient)" filter="url(#glow)">
+    AURION
+  </text>
+  
+  <text x="200" y="340" text-anchor="middle" font-family="Arial, sans-serif" 
+        font-size="16" font-weight="300" letter-spacing="8" fill="#94a3b8">
+    RESEARCH LABS
+  </text>
+  
+  <!-- Tagline -->
+  <text x="200" y="375" text-anchor="middle" font-family="Arial, sans-serif" 
+        font-size="10" font-style="italic" fill="#64748b">
+    Building the Intelligence that Builds the Future
+  </text>
+</svg>

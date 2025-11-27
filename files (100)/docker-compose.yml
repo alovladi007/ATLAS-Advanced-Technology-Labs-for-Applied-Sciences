@@ -1,0 +1,118 @@
+version: '3.9'
+
+services:
+  # PostgreSQL with pgvector extension for Domain Intelligence Graph
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: aurion_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: aurion
+      POSTGRES_PASSWORD: aurion_dev_password
+      POSTGRES_DB: aurion
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aurion"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching, queues, and sessions
+  redis:
+    image: redis:7-alpine
+    container_name: aurion_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # NATS for event-driven messaging
+  nats:
+    image: nats:2-alpine
+    container_name: aurion_nats
+    restart: unless-stopped
+    ports:
+      - "4222:4222"   # Client connections
+      - "8222:8222"   # HTTP monitoring
+    command: 
+      - "--jetstream"
+      - "--store_dir=/data"
+    volumes:
+      - nats_data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8222/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MinIO for S3-compatible object storage
+  minio:
+    image: minio/minio:latest
+    container_name: aurion_minio
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: aurion
+      MINIO_ROOT_PASSWORD: aurion_minio_secret
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"   # API
+      - "9001:9001"   # Console
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # AURION API Service
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: aurion_api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://aurion:aurion_dev_password@postgres:5432/aurion
+      - REDIS_URL=redis://redis:6379
+      - NATS_URL=nats://nats:4222
+      - S3_ENDPOINT=http://minio:9000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      nats:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./apps/api:/app
+      - /app/node_modules
+    command: npm run dev
+
+volumes:
+  pgdata:
+  redis_data:
+  nats_data:
+  minio_data:
+
+networks:
+  default:
+    name: aurion_network
