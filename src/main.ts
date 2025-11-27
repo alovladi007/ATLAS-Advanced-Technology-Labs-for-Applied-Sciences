@@ -33,8 +33,8 @@ async function bootstrap() {
 
   // Swagger documentation
   const config = new DocumentBuilder()
-    .setTitle('AURION Research Labs API')
-    .setDescription('AI-powered meta-automation platform for engineering innovation')
+    .setTitle('ATLAS - Advanced Technology Labs for Applied Sciences API')
+    .setDescription('Building the Intelligence that Builds the Future - AI-powered meta-automation platform')
     .setVersion('1.0')
     .addBearerAuth()
     .addTag('health', 'Health check endpoints')
@@ -54,7 +54,7 @@ async function bootstrap() {
   const port = process.env.API_PORT || 8080;
   await app.listen(port);
 
-  logger.log(`🚀 AURION API running on http://localhost:${port}`);
+  logger.log(`🚀 ATLAS API running on http://localhost:${port}`);
   logger.log(`📚 Swagger docs at http://localhost:${port}/docs`);
 }
 

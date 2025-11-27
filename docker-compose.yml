@@ -4,19 +4,19 @@ services:
   # PostgreSQL with pgvector extension for Domain Intelligence Graph
   postgres:
     image: pgvector/pgvector:pg16
-    container_name: aurion_postgres
+    container_name: atlas_postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: aurion
-      POSTGRES_PASSWORD: aurion_dev_password
-      POSTGRES_DB: aurion
+      POSTGRES_USER: atlas
+      POSTGRES_PASSWORD: atlas_dev_password
+      POSTGRES_DB: atlas
     ports:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U aurion"]
+      test: ["CMD-SHELL", "pg_isready -U atlas"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -24,7 +24,7 @@ services:
   # Redis for caching, queues, and sessions
   redis:
     image: redis:7-alpine
-    container_name: aurion_redis
+    container_name: atlas_redis
     restart: unless-stopped
     ports:
       - "6379:6379"
@@ -40,7 +40,7 @@ services:
   # NATS for event-driven messaging
   nats:
     image: nats:2-alpine
-    container_name: aurion_nats
+    container_name: atlas_nats
     restart: unless-stopped
     ports:
       - "4222:4222"   # Client connections
@@ -59,11 +59,11 @@ services:
   # MinIO for S3-compatible object storage
   minio:
     image: minio/minio:latest
-    container_name: aurion_minio
+    container_name: atlas_minio
     restart: unless-stopped
     environment:
-      MINIO_ROOT_USER: aurion
-      MINIO_ROOT_PASSWORD: aurion_minio_secret
+      MINIO_ROOT_USER: atlas
+      MINIO_ROOT_PASSWORD: atlas_minio_secret
     command: server /data --console-address ":9001"
     ports:
       - "9000:9000"   # API
@@ -76,18 +76,18 @@ services:
       timeout: 20s
       retries: 3
 
-  # AURION API Service
+  # ATLAS API Service
   api:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: aurion_api
+    container_name: atlas_api
     restart: unless-stopped
     env_file:
       - .env
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgresql://aurion:aurion_dev_password@postgres:5432/aurion
+      - DATABASE_URL=postgresql://atlas:atlas_dev_password@postgres:5432/atlas
       - REDIS_URL=redis://redis:6379
       - NATS_URL=nats://nats:4222
       - S3_ENDPOINT=http://minio:9000
@@ -115,4 +115,4 @@ volumes:
 
 networks:
   default:
-    name: aurion_network
+    name: atlas_network

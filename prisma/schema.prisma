@@ -1,5 +1,5 @@
-// AURION Research Labs - Prisma Schema
-// This schema mirrors the init-db.sql structure
+// ATLAS - Advanced Technology Labs for Applied Sciences
+// Prisma Schema - mirrors the init-db.sql structure
 
 generator client {
   provider        = "prisma-client-js"

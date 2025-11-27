@@ -1,7 +1,7 @@
 {
-  "name": "@aurion/api",
+  "name": "@atlas-labs/api",
   "version": "0.1.0",
-  "description": "AURION Research Labs - Backend API",
+  "description": "ATLAS - Advanced Technology Labs for Applied Sciences - Backend API",
   "private": true,
   "main": "dist/main.js",
   "scripts": {
