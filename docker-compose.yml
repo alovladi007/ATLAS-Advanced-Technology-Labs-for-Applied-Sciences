@@ -79,7 +79,7 @@ services:
   # AURION API Service
   api:
     build:
-      context: ./apps/api
+      context: .
       dockerfile: Dockerfile
     container_name: aurion_api
     restart: unless-stopped
@@ -103,7 +103,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - ./apps/api:/app
+      - .:/app
       - /app/node_modules
     command: npm run dev
 
