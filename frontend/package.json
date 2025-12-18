@@ -4,7 +4,7 @@
   "description": "ATLAS - Advanced Technology Labs for Applied Sciences - Frontend",
   "private": true,
   "scripts": {
-    "dev": "npx --no-install next dev -p 4001",
+    "dev": "node ./scripts/dev.mjs",
     "build": "npx --no-install next build",
     "start": "npx --no-install next start",
     "lint": "npx --no-install next lint"
