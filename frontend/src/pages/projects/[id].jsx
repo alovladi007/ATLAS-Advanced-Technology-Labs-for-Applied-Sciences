@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
 import { Button } from "../../components/Button";
@@ -7,7 +6,7 @@ import { Card } from "../../components/Card";
 import { Container } from "../../components/Container";
 import { GradientText } from "../../components/GradientText";
 import { SiteLayout } from "../../components/SiteLayout";
-import { projectById } from "../../lib/projects";
+import { projectById, projectList } from "../../lib/projects";
 
 function AnimatedIn({ children, delay = 0, className = "" }) {
   return (
@@ -23,10 +22,11 @@ function AnimatedIn({ children, delay = 0, className = "" }) {
   );
 }
 
-export default function ProjectDetailPage() {
-  const router = useRouter();
-  const { id } = router.query;
-  const project = useMemo(() => (id ? projectById[id] : null), [id]);
+export function ProjectDetailPageView({ id, project }) {
+  const resolvedProject = useMemo(
+    () => project || (id ? projectById[id] : null),
+    [id, project]
+  );
 
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -36,7 +36,7 @@ export default function ProjectDetailPage() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 0.6], [0, 80]);
 
-  if (!id || !project) {
+  if (!id || !resolvedProject) {
     return (
       <SiteLayout title="Project — ATLAS">
         <Container className="py-24">
@@ -59,8 +59,13 @@ export default function ProjectDetailPage() {
     );
   }
 
+  const projectData = resolvedProject;
+
   return (
-    <SiteLayout title={`${project.name} — ATLAS`} description={project.tagline}>
+    <SiteLayout
+      title={`${projectData.name} — ATLAS`}
+      description={projectData.tagline}
+    >
       <motion.section
         ref={heroRef}
         style={{ opacity: heroOpacity, y: heroY }}
@@ -69,11 +74,11 @@ export default function ProjectDetailPage() {
         <div className="pointer-events-none absolute inset-0">
           <div
             className="absolute -top-24 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full blur-[90px]"
-            style={{ background: `${project.color}20` }}
+            style={{ background: `${projectData.color}20` }}
           />
           <div
             className="absolute right-[-10%] top-24 h-[360px] w-[360px] rounded-full blur-[80px]"
-            style={{ background: `${project.color}18` }}
+            style={{ background: `${projectData.color}18` }}
           />
           <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
         </div>
@@ -92,44 +97,47 @@ export default function ProjectDetailPage() {
             <div
               className="grid h-24 w-24 place-items-center rounded-3xl border"
               style={{
-                borderColor: `${project.color}33`,
-                backgroundColor: `${project.color}1A`,
+                borderColor: `${projectData.color}33`,
+                backgroundColor: `${projectData.color}1A`,
               }}
             >
-              <span className="text-5xl">{project.icon}</span>
+              <span className="text-5xl">{projectData.icon}</span>
             </div>
 
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-3">
                 <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">
                   <span className="bg-atlas-gradient bg-clip-text text-transparent">
-                    {project.name}
+                    {projectData.name}
                   </span>
                 </h1>
                 <span
                   className="rounded-full border px-3 py-1 text-xs font-semibold"
                   style={{
-                    borderColor: `${project.color}33`,
-                    backgroundColor: `${project.color}12`,
-                    color: project.color,
+                    borderColor: `${projectData.color}33`,
+                    backgroundColor: `${projectData.color}12`,
+                    color: projectData.color,
                   }}
                 >
-                  {project.status}
+                  {projectData.status}
                 </span>
               </div>
 
-              <div className="mt-2 text-sm font-semibold" style={{ color: project.color }}>
-                {project.category}
+              <div
+                className="mt-2 text-sm font-semibold"
+                style={{ color: projectData.color }}
+              >
+                {projectData.category}
               </div>
 
               <p className="mt-4 max-w-3xl text-base leading-7 text-atlas-text-secondary sm:text-lg">
-                {project.description}
+                {projectData.description}
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                {project.github ? (
+                {projectData.github ? (
                   <a
-                    href={project.github}
+                    href={projectData.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-xl bg-atlas-gradient px-5 py-3 text-sm font-semibold text-white shadow-glow hover:opacity-95"
@@ -161,7 +169,7 @@ export default function ProjectDetailPage() {
               Built with modern technologies
             </div>
             <div className="mt-6 flex flex-wrap gap-2">
-              {project.tech.map((t) => (
+              {projectData.tech.map((t) => (
                 <span
                   key={t}
                   className="rounded-lg border border-atlas-border bg-white/[0.03] px-3 py-2 text-sm font-semibold text-atlas-text-secondary"
@@ -186,7 +194,7 @@ export default function ProjectDetailPage() {
           </AnimatedIn>
 
           <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {project.features.map((f, idx) => (
+            {projectData.features.map((f, idx) => (
               <motion.div
                 key={f}
                 initial={{ opacity: 0, y: 12 }}
@@ -199,9 +207,9 @@ export default function ProjectDetailPage() {
                     <div
                       className="grid h-9 w-9 flex-none place-items-center rounded-xl border text-xs font-bold"
                       style={{
-                        borderColor: `${project.color}33`,
-                        backgroundColor: `${project.color}12`,
-                        color: project.color,
+                        borderColor: `${projectData.color}33`,
+                        backgroundColor: `${projectData.color}12`,
+                        color: projectData.color,
                       }}
                     >
                       {String(idx + 1).padStart(2, "0")}
@@ -219,9 +227,9 @@ export default function ProjectDetailPage() {
         <Container className="text-center">
           <AnimatedIn>
             <div className="mx-auto max-w-2xl">
-              <div className="text-6xl">{project.icon}</div>
+              <div className="text-6xl">{projectData.icon}</div>
               <h2 className="mt-6 text-3xl font-extrabold tracking-tight">
-                Interested in <GradientText>{project.name}</GradientText>?
+                Interested in <GradientText>{projectData.name}</GradientText>?
               </h2>
               <p className="mt-3 text-base leading-7 text-atlas-text-secondary">
                 Get in touch to discuss implementation, licensing, or partnership opportunities.
@@ -240,4 +248,27 @@ export default function ProjectDetailPage() {
       </section>
     </SiteLayout>
   );
+}
+
+export default function ProjectDetailPage(props) {
+  return <ProjectDetailPageView {...props} />;
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: projectList.map((p) => ({ params: { id: p.id } })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const id = params?.id || null;
+  const project = id ? projectById[id] || null : null;
+
+  return {
+    props: {
+      id,
+      project,
+    },
+  };
 }
