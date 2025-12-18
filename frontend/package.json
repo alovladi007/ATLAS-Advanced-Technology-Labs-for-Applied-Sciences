@@ -4,10 +4,10 @@
   "description": "ATLAS - Advanced Technology Labs for Applied Sciences - Frontend",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 4001",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "npx --no-install next dev -p 4001",
+    "build": "npx --no-install next build",
+    "start": "npx --no-install next start",
+    "lint": "npx --no-install next lint"
   },
   "dependencies": {
     "@react-three/drei": "^9.92.7",
